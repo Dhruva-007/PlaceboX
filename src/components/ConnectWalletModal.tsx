@@ -16,17 +16,17 @@ const ConnectWalletModal = ({
 
   const handleWalletClick = async (wallet: Wallet) => {
     try {
-      if (wallet.isConnected) {
-        await wallet.setActive();
-        toast.success("Wallet set as active");
-      } else {
+      if (!wallet.isConnected) {
         await wallet.connect();
-        toast.success("Wallet connected successfully");
       }
+      await wallet.setActive();
+      
+      toast.success("Wallet connected and set as active!");
       onClose();
     } catch (error) {
       console.error(error);
-      toast.error("Failed to connect wallet");
+      const message = error instanceof Error ? error.message : "Failed to connect wallet";
+      toast.error(message);
     }
   };
 
@@ -46,7 +46,7 @@ const ConnectWalletModal = ({
   };
 
   return (
-    <div className="fixed inset-0 z-50 bg-black/50 flex items-center justify-center" onClick={onClose}>
+    <div className="fixed inset-0 z-[100] bg-black/50 flex items-center justify-center" onClick={onClose}>
       <div className="bg-background rounded-lg shadow-elegant w-full max-w-md p-6 border border-border" onClick={(e) => e.stopPropagation()}>
         <div className="flex items-center justify-between mb-4">
           <h3 className="text-xl font-bold">Connect to a wallet</h3>
