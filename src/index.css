@@ -1,0 +1,106 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
+All colors MUST be HSL.
+*/
+
+@layer base {
+  :root {
+    --background: 240 10% 3.9%;
+    --foreground: 210 40% 98%;
+
+    --card: 240 8% 8%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 240 8% 8%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 263 70% 50%;
+    --primary-foreground: 210 40% 98%;
+
+    --secondary: 240 8% 12%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 240 8% 12%;
+    --muted-foreground: 215 20.2% 65.1%;
+
+    --accent: 189 95% 52%;
+    --accent-foreground: 240 10% 3.9%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 240 8% 15%;
+    --input: 240 8% 15%;
+    --ring: 263 70% 50%;
+
+    --radius: 0.75rem;
+
+    --gradient-primary: linear-gradient(135deg, hsl(263 70% 50%), hsl(263 85% 65%));
+    --gradient-accent: linear-gradient(135deg, hsl(189 95% 52%), hsl(208 100% 60%));
+    --gradient-card: linear-gradient(180deg, hsl(240 8% 10%), hsl(240 8% 8%));
+    
+    --glow-primary: 0 0 30px hsl(263 70% 50% / 0.5);
+    --glow-accent: 0 0 20px hsl(189 95% 52% / 0.4);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+  }
+
+  .glow-primary {
+    box-shadow: var(--glow-primary);
+  }
+
+  .glow-accent {
+    box-shadow: var(--glow-accent);
+  }
+
+  .gradient-primary {
+    background: var(--gradient-primary);
+  }
+
+  .gradient-accent {
+    background: var(--gradient-accent);
+  }
+
+  .gradient-card {
+    background: var(--gradient-card);
+  }
+}
+
+@layer utilities {
+  .animate-glow {
+    animation: glow 2s ease-in-out infinite alternate;
+  }
+
+  @keyframes glow {
+    from {
+      box-shadow: 0 0 10px hsl(263 70% 50% / 0.3);
+    }
+    to {
+      box-shadow: 0 0 30px hsl(263 70% 50% / 0.6), 0 0 40px hsl(189 95% 52% / 0.3);
+    }
+  }
+
+  .animate-float {
+    animation: float 3s ease-in-out infinite;
+  }
+
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+}
